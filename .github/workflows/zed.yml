@@ -5,6 +5,10 @@ on:
     - cron: '0 * * * *'   # κάθε 1 ώρα 
   workflow_dispatch:       # επιτρέπει χειροκίνητο run
 
+concurrency:
+  group: "cron_jobs"
+  cancel-in-progress: false
+
 jobs:
   run_zed:
     runs-on: ubuntu-latest
