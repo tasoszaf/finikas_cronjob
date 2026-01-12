@@ -173,7 +173,7 @@ def send_price(apartment_id, date_str, price):
 results = []
 
 start = datetime.now().date()
-end   = datetime(2026, 13, 1).date()
+end   = datetime(2026, 1, 13).date()
 
 current = start
 
