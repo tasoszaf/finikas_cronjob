@@ -30,7 +30,7 @@ MIN_PRICE_SAME_DAY_BY_MONTH = {
 }
 
 TOTAL_ROOMS = len(APARTMENTS)
-TEST_MODE = True  # True = εμφανίζει τιμές, False = στέλνει στο Smoobu
+TEST_MODE = False
 
 # Excel
 df = pd.read_excel("data_zed.xlsx")
