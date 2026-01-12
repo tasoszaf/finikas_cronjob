@@ -4,6 +4,8 @@
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
+import os
+
 
 # -----------------------------
 #   CONFIG
@@ -11,8 +13,10 @@ from datetime import datetime, timedelta
 API_URL_AVAIL = "https://login.smoobu.com/booking/checkApartmentAvailability"
 API_URL_RATES = "https://login.smoobu.com/api/rates"
 
-API_KEY = "3MZqrgDd0OluEWaBywbhp7P9Zp8P2ACmVpX79rPc9R"
-CUSTOMER_ID = 160071      
+# Διαβάζει Secrets από GitHub Actions
+CUSTOMER_ID = int(os.getenv("SMOOBU_CUSTOMER_ID"))
+API_KEY = os.getenv("SMOOBU_API_KEY")
+
 
 APARTMENTS = [
     1439913, 1439915, 1439917, 1439919, 1439921, 1439923, 1439925, 1439927,
@@ -26,7 +30,7 @@ MIN_PRICE_SAME_DAY_BY_MONTH = {
 }
 
 TOTAL_ROOMS = len(APARTMENTS)
-TEST_MODE = False  # True = εμφανίζει τιμές, False = στέλνει στο Smoobu
+TEST_MODE = True  # True = εμφανίζει τιμές, False = στέλνει στο Smoobu
 
 # Excel
 df = pd.read_excel("/Users/anastasioszafeiriou/Desktop/data_zed.xlsx")
@@ -156,7 +160,7 @@ def send_price_to_smoobu(apartment_id, date_str, price):
 # -----------------------------
 current_datetime = datetime.now()
 start = datetime.now().date()
-end = datetime(2026, 3, 31).date()
+end = start + timedelta(days=210) 
 current = start
 
 while current <= end:
