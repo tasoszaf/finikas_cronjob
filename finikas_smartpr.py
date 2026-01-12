@@ -13,8 +13,16 @@ import os
 API_URL_AVAIL = "https://login.smoobu.com/booking/checkApartmentAvailability"
 API_URL_RATES = "https://login.smoobu.com/api/rates"
 
-API_KEY = os.getenv("SMOOBU_API_KEY")
-CUSTOMER_ID = int(os.getenv("SMOOBU_CUSTOMER_ID"))
+# Διαβάζει Secrets από GitHub Actions
+customer_id_str = os.getenv("SMOOBU_CUSTOMER_ID")
+if not customer_id_str:
+    raise ValueError("❌ SMOOBU_CUSTOMER_ID secret is missing! Set it in GitHub Actions.")
+CUSTOMER_ID = int(customer_id_str)
+
+api_key_str = os.getenv("SMOOBU_API_KEY")
+if not api_key_str:
+    raise ValueError("❌ SMOOBU_API_KEY secret is missing! Set it in GitHub Actions.")
+API_KEY = api_key_str
 
 APARTMENTS = [
     2715198, 2715203, 2715218, 2715223, 2715238,
