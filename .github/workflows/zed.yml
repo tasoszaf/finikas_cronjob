@@ -2,7 +2,7 @@ name: Zed Cron Job
 
 on:
   schedule:
-    - cron: '0 * * * *'   # κάθε 1 ώρα 
+    - cron: '30 */2 * * *'  
   workflow_dispatch:       # επιτρέπει χειροκίνητο run
 
 concurrency:
