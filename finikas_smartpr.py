@@ -28,7 +28,7 @@ MIN_PRICE_SAME_DAY_BY_MONTH = {
 }
 
 TOTAL_ROOMS = len(APARTMENTS)
-TEST_MODE = True  # True για δοκιμή, False για αποστολή σε Smoobu
+TEST_MODE = False  # True για δοκιμή, False για αποστολή σε Smoobu
 
 # Load Excel
 df = pd.read_excel("data_finikas.xlsx")
