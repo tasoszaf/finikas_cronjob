@@ -27,7 +27,7 @@ MIN_PRICE_SAME_DAY_BY_MONTH = {
 }
 
 TOTAL_ROOMS = len(APARTMENTS)
-TEST_MODE = True
+TEST_MODE = False
 
 # Load Excel
 df = pd.read_excel("data_finikas.xlsx")
