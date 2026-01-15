@@ -206,11 +206,13 @@ def send_price(apartment_id, date_str, price, retries=3, timeout=10):
 
             r = requests.post(API_URL_RATES, json=payload, headers=headers, timeout=timeout)
             r.raise_for_status()
+            print(f"✓ Sent {price}€ for {date_str} → Smoobu")
             return
 
         except requests.exceptions.RequestException as e:
             print(f"⚠ Send attempt {attempt} failed for Apt {apartment_id}: {e}")
             time.sleep(2)
+    print(f"❌ Failed to send price for Apt {apartment_id} on {date_str} after {retries} attempts")         
 
 # =====================================================
 # MAIN LOOP
