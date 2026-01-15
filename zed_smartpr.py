@@ -217,9 +217,6 @@ def send_price(apartment_id, date_str, price, retries=3, timeout=10):
 # =====================================================
 # MAIN LOOP
 # =====================================================
-# =====================================================
-# MAIN LOOP
-# =====================================================
 now = datetime.now()
 current = now.date()
 end = current + timedelta(days=90)
