@@ -30,7 +30,7 @@ MIN_PRICE_SAME_DAY_BY_MONTH = {
     9: 80, 10: 70, 11: 50, 12: 50
 }
 
-TEST_MODE = True  # True = δεν στέλνει στο Smoobu
+TEST_MODE = False  # True = δεν στέλνει στο Smoobu
 
 # =====================================================
 # LOAD EXCEL
