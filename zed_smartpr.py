@@ -226,28 +226,36 @@ while current <= end:
 
     occ, available = get_total_occupancy(date_str, APARTMENTS)
     if occ is None or not available:
+        print(f"❌ {date_str} | No available apartments or failed to get occupancy")
         current += timedelta(days=1)
         continue
 
     price, x, min_p, max_p = calculate_price(occ, current, now)
     if price is None:
+        print(f"⚠ {date_str} | Pricing calculation failed")
         current += timedelta(days=1)
         continue
 
-    # Κρατάμε ΜΟΝΟ διαθέσιμα και ΜΕ ΣΕΙΡΑ APARTMENTS
+    # Κρατάμε μόνο διαθέσιμα και με σειρά APARTMENTS
     available_sorted = [apt for apt in APARTMENTS if apt in available]
 
     if max_p is None:
-        # long-term → ίδια τιμή
+        # Long-term → ίδια τιμή για όλα τα διαθέσιμα
         for apt in available_sorted:
+            print(f"[TEST] {date_str} | Apt {apt} → {price}")  # εκτύπωση
             send_price(apt, date_str, price)
     else:
-        step = (max_p - price) / len(available_sorted)
-        for i, apt in enumerate(available_sorted):
-            p = round(min(price + i * step, max_p), 1)
-            send_price(apt, date_str, p)
+        step = (max_p - price) / len(available_sorted) if len(available_sorted) > 0 else 0
+        for i, apt in enumerate(available_sorted, start=1):
+            price_i = price + (i-1)*step
+            price_i = min(price_i, max_p)
+            price_i = round(price_i, 1)
+            print(f"[TEST] {date_str} | Apt {apt} → {price_i}")  # εκτύπωση
+            send_price(apt, date_str, price_i)
 
+    # Εκτύπωση συνολικής πληρότητας, x και base price
     print(f"✅ {date_str} | Occ={occ:.4f} | x={x} | Base={price}")
     current += timedelta(days=1)
 
 print("\nFinished processing all valid dates.")
+
